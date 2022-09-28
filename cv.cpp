@@ -16,11 +16,11 @@ double Ux(double x, double omega, double x0, double beta) {
 
 double Uxy(double x, double y, double z) {
   const double omega = 2.0;
-  const double big_omega = 1.01 * omega * omega;
+  const double big_omega_square = 1.01 * omega * omega;
   const double x0 = 2.2;
   const double beta = 1.0 / (300.0 * 0.0019872041);
   const double ux = Ux(x, omega, x0, beta);
-  return ux + (big_omega * big_omega * (x - y) * (x - y) / 2.0) / beta;
+  return ux + (big_omega_square * (x - y) * (x - y) / 2.0) / beta;
 }
 
 double dUx_x(double x, double omega, double x0, double beta) {
@@ -40,11 +40,11 @@ double getPotential(double x, double y, double z) {
 std::vector<double> getGradients(double x, double y, double z) {
   std::vector<double> grad(3);
   const double omega = 2.0;
-  const double big_omega = 1.01 * omega * omega;
+  const double big_omega_square = 1.01 * omega * omega;
   const double x0 = 2.2;
   const double beta = 1.0 / (300.0 * 0.0019872041);
-  const double dUxy_dx = dUx_x(x, omega, x0, beta) + (big_omega * big_omega * (x - y)) / beta;
-  const double dUxy_dy = -(big_omega * big_omega * (x - y)) / beta;
+  const double dUxy_dx = dUx_x(x, omega, x0, beta) + (big_omega_square * (x - y)) / beta;
+  const double dUxy_dy = -(big_omega_square * (x - y)) / beta;
   grad[0] = dUxy_dx;
   grad[1] = dUxy_dy;
   grad[2] = 0;
