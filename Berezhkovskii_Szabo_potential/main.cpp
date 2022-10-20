@@ -29,6 +29,9 @@ void dump_potential() {
   double y_upper = 6.0;
   double y_width = 0.02;
   size_t ny = std::nearbyint((y_upper - y_lower) / y_width);
+  ofs << "# 2\n";
+  ofs << "# " << x_lower << " " << x_width << " " << nx << " 0\n";
+  ofs << "# " << y_lower << " " << y_width << " " << nx << " 0\n";
   for (size_t i = 0; i < nx; ++i) {
     for (size_t j = 0; j < ny; ++j) {
       double x = x_lower + (i + 0.5) * x_width;
